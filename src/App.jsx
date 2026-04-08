@@ -7,6 +7,8 @@ import runKMeans from './KMeans.jsx';
 import FullscreenModal from './FSModal.jsx';
 import downloadAllAsZip from './DownloadAllZip.jsx';
 import Spinner from './Spinner.jsx';
+import Header from './Header.jsx';
+
 
 
 // --- MAIN APP ---
@@ -36,14 +38,42 @@ export default function App() {
   
 
   return (
-    <div style={{ textAlign: 'center', padding: '40px 20px', backgroundColor: '#f4f7f6', minHeight: '100vh' }}>
+    <div style={{justifyContent: 'center', fieldwrap: 'wrap', minHeight: '100vh'} }> 
+    <Header/>
+    <div style={{ textAlign: 'center', padding: '5px 20px', backgroundColor: '#f4f7f6', minHeight: '100vh' }}>
+      
       { isProcessing && ( <Spinner/> )  }
 
      <h1>K-Means Visualization </h1>
       
       {/* Showing control Container */}
 
-     <div style={styles.controlsContainer}>
+    <div style={styles.controlsContainer}>
+      {/* Group 1: File Upload */}
+      <div style={styles.inputGroup}>
+        <label style={{ fontWeight: 'bold' }}>Upload an Image:</label>
+        <input type="file" onChange={handleImageUpload} style={{maxWidth: '350px'}} /> 
+      </div>
+
+      {/* Group 2: K-Value */}
+      <div style={styles.inputGroup}>
+        <label style={{ fontWeight: 'bold' }}>K Value:</label>
+        <input type="number" value={kValue} onChange={e => setKValue(Number(e.target.value))} style={styles.inputStyle} />
+      </div>
+
+      {/* Action Button */}
+      <button 
+        onClick={() => runKMeans(setIsProcessing, mainCanvasRef, image, kValue, results, setResults)} 
+        disabled={!image || isProcessing} 
+        style={{...styles.primaryBtnStyle, minWidth: '250px'}}
+      >
+        Analyze & Generate
+      </button>
+    </div>
+
+
+
+     {/* <div style={styles.controlsContainer }>
         <label style={{ fontWeight: 'bold' }}>Upload an Image:</label>
         <input type="file" placeholder='Select' onChange={handleImageUpload}/> 
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -53,7 +83,9 @@ export default function App() {
         <button onClick={()=>runKMeans(setIsProcessing, mainCanvasRef, image, kValue, results, setResults)} disabled={!image || isProcessing} style={styles.primaryBtnStyle}>
           Analyze & Generate
         </button>
-     </div>
+     </div> */}
+
+
 
 
      {/* --- POST-CONTROL SUMMARY SECTION --- */}
@@ -177,6 +209,28 @@ export default function App() {
       )}
 
      
+    </div>
+
+
+
+{/* --- DOCUMENTATION SECTIONS --- */}
+<div style={{ marginTop: '80px', textAlign: 'left', maxWidth: '800px', margin: '80px auto 0 auto', padding: '0 20px' }}>
+  
+
+
+  <section id="about" style={{ paddingBottom: '100px' }}>
+    <h2 style={{ color: '#1976d2', borderBottom: '2px solid #1976d2', paddingBottom: '10px' }}>About Us</h2>
+    <p>
+      This K-Means Tool was built to demonstrate the power of unsupervised machine learning in image processing. 
+      By clustering pixel data, we can effectively compress images and extract dominant color palettes automatically.
+    </p>
+    <p style={{ color: '#666', fontStyle: 'italic' }}>Developed as an educational tool by Ubaid ur Rehman - MSCS student @ IST Islamabad Pakistan.</p>
+  </section>
+
+</div>
+
+
+
     </div>
   );
 }

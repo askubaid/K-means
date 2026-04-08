@@ -1,16 +1,39 @@
-# React + Vite
+# K-Means Image Segmenter
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive React.js tool that uses the K-Means clustering algorithm to perform color segmentation on images.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Live Demo
+Tool Demonstration is here: https://askubaid.github.io/K-means/
 
-## React Compiler
+## 📖 About the Algorithm
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+K-Means clustering is a machine learning method used to group data points. In this app, each pixel's RGB value is a data point.
+The algorithm:
+- **1:** Picks random colors.
+- **2:** Assigns every pixel to the nearest of those colors.
+- **3:** Calculates the average color of each group and moves the colors to that average.
+- **4:** Repeats until the colors stop changing (Convergence)
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Features
+- **Real-time Clustering**: Processes pixels until centroids converge.
+- **Transparency Support**: Individual clusters are exported with transparent backgrounds.
+- **ZIP Export**: Download all color segments, the original, and the simplified image in one click.
+- **Mobile Responsive**: Fully functional on mobile and desktop browsers.
+
+## 💻 How to Run Locally
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/askubaid/K-means.git
+   cd K-means
+   
+2. **Install Dependencies**
+   ```bash
+   npm install
+
+3. **Run the App**
+   ```bash
+   npm run dev
+

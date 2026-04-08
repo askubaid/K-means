@@ -2,7 +2,29 @@
 
 const  styles = {
 
-controlsContainer: { background: 'white', display: 'inline-flex', alignItems: 'center', gap: '20px', padding: '20px', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.08)', marginBottom: '40px' },
+controlsContainer: {
+  background: 'white',
+  display: 'flex', // Changed from inline-flex
+  flexDirection: 'row', 
+  flexWrap: 'wrap', // This is the key for mobile stacking
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: '30px',
+  padding: '10px',
+  borderRadius: '12px',
+  boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+  marginBottom: '40px',
+  maxWidth: '100%', // Ensures it doesn't touch screen edges on mobile
+  margin: '0 auto 40px auto'
+},
+inputGroup : {
+  display: 'flex',
+  alignItems: 'center',
+  gap: '10px',
+  minWidth: '200px', // Forces wrap when space is less than this
+  justifyContent: 'center'
+},
+//{justifyContent: 'center', fieldwrap: 'wrap', textAlign: 'center',background: 'white', display: 'inline-flex', alignItems: 'center', gap: '20px', padding: '20px', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.08)', marginBottom: '40px' },
 inputStyle: { width: '60px', padding: '8px', borderRadius: '6px', border: '1px solid #ddd' },
 primaryBtnStyle: { backgroundColor: '#1976d2', color: 'white', border: 'none', padding: '10px 20px', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' },
 cardStyle: { background: 'white', padding: '15px', borderRadius: '12px', cursor: 'pointer', boxShadow: '0 3px 8px rgba(0,0,0,0.1)', width: '210px' },
@@ -32,7 +54,6 @@ labelStyle : {
   fontWeight: 'normal',
   fontSize: '0.9em'
 }
-
 
 
 }
