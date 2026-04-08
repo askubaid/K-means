@@ -1,0 +1,33 @@
+import JSZip from 'jszip'; // Import JSZip
+
+
+const downloadAllAsZip = async (image, results, mainCanvasRef) => {
+    const zip = new JSZip();
+    const folder = zip.folder("K-Means-Export");
+
+    // 1. Original Image (Convert base64 to blob)
+    const originalBlob = await fetch(image).then(r => r.blob());
+    folder.file("01-original-image.png", originalBlob);
+
+    // 2. Simplified Image
+    const simplifiedData = mainCanvasRef.current.toDataURL("image/png").split(',')[1];
+    folder.file("02-simplified-output.png", simplifiedData, {base64: true});
+
+    // 3. Individual Segments
+    results.segments.forEach((seg, i) => {
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = seg.width;
+      tempCanvas.height = seg.height;
+      tempCanvas.getContext('2d').putImageData(seg, 0, 0);
+      const data = tempCanvas.toDataURL("image/png").split(',')[1];
+      folder.file(`cluster-${i+1}-rgb(${results.colors[i].r},${results.colors[i].g},${results.colors[i].b}).png`, data, {base64: true});
+    });
+
+    const content = await zip.generateAsync({type: "blob"});
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(content);
+    link.download = "kmeans-project-export.zip";
+    link.click();
+  };
+
+  export default downloadAllAsZip;
